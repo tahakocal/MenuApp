@@ -1,0 +1,114 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model MenuApp.Models.BrandViewModel
+
+@{
+    ViewData["Title"] = "Create Brand";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="main-content">
+    <div id="stepper1" class="bs-stepper">
+        <div class="card">
+            <div class="card-header d-flex justify-content-center">
+                <div class="col-md-8 d-lg-flex flex-lg-row align-items-lg-center justify-content-lg-between" role="tablist">
+                    <div class="step" data-target="#test-l-1">
+                        <div class="step-trigger" role="tab" id="stepper1trigger1" aria-controls="test-l-1">
+                            <div class="bs-stepper-circle">1</div>
+                            <div class="">
+                                <h5 class="mb-0 steper-title">Marka Bilgileri</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bs-stepper-line"></div>
+                    <div class="step" data-target="#test-l-2">
+                        <div class="step-trigger" role="tab" id="stepper1trigger2" aria-controls="test-l-2">
+                            <div class="bs-stepper-circle">2</div>
+                            <div class="">
+                                <h5 class="mb-0 steper-title">Sosyal Medya Bilgileri</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="bs-stepper-content">
+                    <form asp-action="CreateBrand" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <div id="test-l-1" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger1">
+                            <h5 class="mb-1">Marka Bilgileri</h5>
+                            <p class="mb-4">Lütfen marka bilgilerinizi eksiksiz doldurun.</p>
+
+                            <div class="row g-3">
+                                <div class="col-12 col-lg-6">
+                                    <label class="form-label" asp-for="Name">Marka Adı</label>
+                                    <input type="text" class="form-control" asp-for="Name" placeholder="Marka Adı">
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <label class="form-label" asp-for="Description">Açıklama</label>
+                                    <input type="text" class="form-control" asp-for="Description" placeholder="Marka Adı">
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <label for="brandslogo" class="form-label" asp-for="Logo">Marka Logo</label>
+                                    <input class="form-control" type="file" asp-for="Logo" id="brandslogo">
+                                    <span asp-validation-for="Logo" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <label class="form-label" asp-for="Phone">Telefon Numarası</label>
+                                    <input type="text" class="form-control" asp-for="Phone" placeholder="Telefon Numarası">
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <label class="form-label" asp-for="Email">E-mail Adresi</label>
+                                    <input type="text" class="form-control" asp-for="Email" placeholder="E-mail Adresi">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 col-lg-12">
+                                    <a class="btn btn-grd-primary px-4" onclick="stepper1.next()">Next<i class='bx bx-right-arrow-alt ms-2'></i></a>
+                                </div>
+                            </div><!---end row-->
+                        </div>
+
+
+                        <div id="test-l-2" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger2">
+                            <h5 class="mb-1">Sosyal Medya Bilgileri</h5>
+                            <p class="mb-4">Lütfen sosyal medya bilgilerini eksiksiz doldurun.</p>
+
+                            <div class="row g-3">
+                                <div class="col-12 col-lg-6">
+                                    <label class="form-label" asp-for="Instagram">İnstagram</label>
+                                    <input type="text" class="form-control" placeholder="İnstagram" asp-for="Instagram">
+                                    <span asp-validation-for="Instagram" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <label class="form-label" asp-for="Tiktok">Tiktok</label>
+                                    <input type="text" class="form-control" placeholder="Tiktok" asp-for="Tiktok">
+                                    <span asp-validation-for="Tiktok" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <label class="form-label" asp-for="Facebook">Facebook</label>
+                                    <input type="text" class="form-control" placeholder="Facebook" asp-for="Facebook">
+                                    <span asp-validation-for="Facebook" class="text-danger"></span>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <label class="form-label" asp-for="SocialX">X</label>
+                                    <input type="text" class="form-control" placeholder="X" asp-for="SocialX">
+                                    <span asp-validation-for="SocialX" class="text-danger"></span>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <a class="btn btn-grd-info px-4" onclick="stepper1.previous()"><i class="bx bx-left-arrow-alt me-2"></i>Previous</a>
+                                        <button type="submit" class="btn btn-primary">Create</button>
+                                    </div>
+                                </div>
+                            </div><!---end row-->
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

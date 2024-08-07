@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="13.0.1"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="8.0.7"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7"/>
+        <PackageReference Include="EasyCaching.InMemory" Version="1.9.2"/>
+        <PackageReference Include="FluentValidation" Version="11.9.2"/>
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.7"/>
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.7"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.7"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3"/>
+        <PackageReference Include="StackExchange.Redis" Version="2.8.0"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\MenuApp.Core\MenuApp.Core.csproj"/>
+        <ProjectReference Include="..\MenuApp.Data\MenuApp.Data.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="wwwroot\Admin\"/>
+        <Folder Include="wwwroot\uploads\"/>
+    </ItemGroup>
+
+</Project>

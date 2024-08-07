@@ -1,0 +1,188 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+<!doctype html>
+<html lang="en" data-bs-theme="blue-theme">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MenuApp - TAIGA</title>
+    <!--favicon-->
+    <link rel="icon" href="~/Admin/assets/images/favicon-32x32.png" type="image/png">
+    <!-- loader-->
+    <link href="~/Admin/assets/css/pace.min.css" rel="stylesheet">
+    <script src="~/Admin/assets/js/pace.min.js"></script>
+
+    <!--plugins-->
+    <link href="~/Admin/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Admin/assets/plugins/metismenu/metisMenu.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Admin/assets/plugins/metismenu/mm-vertical.css">
+    <link rel="stylesheet" type="text/css" href="~/Admin/assets/plugins/simplebar/css/simplebar.css">
+    <link href="~/Admin/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+    <link href="~/Admin/assets/plugins/bs-stepper/css/bs-stepper.css" rel="stylesheet">
+    <!--bootstrap css-->
+    <link href="~/Admin/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
+    <!--main css-->
+    <link href="~/Admin/assets/css/bootstrap-extended.css" rel="stylesheet">
+    <link href="~/Admin/sass/main.css" rel="stylesheet">
+    <link href="~/Admin/sass/bordered-theme.css" rel="stylesheet">
+    <link href="~/Admin/sass/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+
+</head>
+<body>
+
+<header class="top-header">
+    <nav class="navbar navbar-expand align-items-center gap-4">
+        <div class="btn-toggle">
+            <a href="javascript:">
+                <i class="material-icons-outlined">menu</i>
+            </a>
+        </div>
+        <select id="brandSelect" class="form-select" aria-label="Default select example">
+            <option disabled="" selected>Select Brand</option>
+        </select>
+
+        <ul class="navbar-nav gap-1 nav-right-links align-items-right">
+            <li class="nav-item dropdown">
+                <a href="javascrpt:;" class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+                    <img src="~/Admin/assets/images/avatars/01.png" class="rounded-circle p-1 border" width="45" height="45" alt="">
+                </a>
+                <div class="dropdown-menu dropdown-user dropdown-menu-end shadow">
+                    <a class="dropdown-item  gap-2 py-2" href="javascript:">
+                        <div class="text-center">
+                            <img src="~/Admin/assets/images/avatars/01.png" class="rounded-circle p-1 shadow mb-3" width="90" height="90"
+                                 alt="">
+                            <h6 class="user-name mb-0 fw-bold">Hello, <br/> @User.Identity?.Name</h6>
+                        </div>
+                    </a>
+                    <hr class="dropdown-divider">
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button id="logout" type="submit" class="dropdown-item d-flex align-items-center gap-2 py-2">
+                            <i
+                                class="material-icons-outlined">
+                                person_outline
+                            </i>Logout
+                        </button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+
+    </nav>
+</header>
+<aside class="sidebar-wrapper" data-simplebar="true">
+    <div class="sidebar-header">
+        @* <div class="logo-icon"> *@
+        @*     <img src="~/Admin/assets/images/logo-icon.png" class="logo-img" alt=""> *@
+        @* </div> *@
+        <div class="logo-name flex-grow-1">
+            <a asp-action="Index" asp-controller="Admin">
+                <h5 class="mb-0">MenuApp</h5>
+            </a>
+        </div>
+        <div class="sidebar-close">
+            <span class="material-icons-outlined">close</span>
+        </div>
+    </div>
+    <div class="sidebar-nav">
+        <ul class="metismenu" id="sidenav">
+            <li>
+                <a href="javascript:" class="has-arrow">
+                    <div class="parent-icon">
+                        <i class="material-icons-outlined">home</i>
+                    </div>
+                    <div class="menu-title">Dashboard</div>
+                </a>
+                <ul>
+                    <li>
+                        <a asp-area="" asp-controller="Admin" asp-action="ListBrands"><i class="material-icons-outlined">arrow_right</i>Brands</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Admin" asp-action="ListProducts"><i class="material-icons-outlined">arrow_right</i>Products</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Admin" asp-action="ListCategories"><i class="material-icons-outlined">arrow_right</i>Categories</a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</aside>
+<!--end sidebar-->
+
+<main class="main-wrapper">
+    @RenderBody()
+</main>
+
+<div class="overlay btn-toggle"></div>
+
+<script src="~/Admin/assets/js/bootstrap.bundle.min.js"></script>
+<script src="~/Admin/assets/js/jquery.min.js"></script>
+<script src="~/Admin/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+<script src="~/Admin/assets/plugins/metismenu/metisMenu.min.js"></script>
+<script src="~/Admin/assets/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<script src="~/Admin/assets/plugins/bs-stepper/js/main.js"></script>
+<script src="~/Admin/assets/plugins/simplebar/js/simplebar.min.js"></script>
+<script src="~/Admin/assets/js/main.js"></script>
+<script src="~/Admin/assets/plugins/fancy-file-uploader/jquery.ui.widget.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", false)
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const selectElement = document.getElementById("brandSelect");
+
+        fetch(`/Admin/GetBrandsByUserId`)
+            .then(response => response.json())
+            .then(data => {
+                const brands = data.brands;
+                const selectedBrandId = data.selectedBrandId;
+
+                brands.forEach((brand) => {
+                    const option = document.createElement("option");
+                    option.value = brand.id;
+                    option.textContent = brand.name;
+                    if (brand.id === selectedBrandId) {
+                        option.selected = true;
+                    }
+                    selectElement.appendChild(option);
+                });
+
+                if (selectedBrandId) {
+                    saveSelectedBrandId(selectedBrandId);
+                } else if (brands.length === 1) {
+                    saveSelectedBrandId(brands[0].id);
+                } else if (brands.length > 0) {
+                    saveSelectedBrandId(brands[0].id);
+                }
+            })
+            .catch(error => console.error('Error fetching brands:', error));
+
+        selectElement.addEventListener('change', function () {
+            const selectedBrandId = this.value;
+            saveSelectedBrandId(selectedBrandId);
+            window.location.reload();
+        });
+
+        function saveSelectedBrandId(brandId) {
+            fetch('/Admin/SaveSelectedBrandId', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ BrandId: brandId })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Brand ID successfully saved:', data);
+                })
+                .catch(error => console.error('Error saving brand ID:', error));
+        }
+    });
+</script>
+</body>
+
+</html>

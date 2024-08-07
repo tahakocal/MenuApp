@@ -1,0 +1,136 @@
+﻿@model MenuApp.Models.ProductViewModel
+@{
+    ViewData["Title"] = "Edit Product";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="main-content">
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Product</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item">
+                        <a href="javascript:;">
+                            <i class="bx bx-home-alt"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12">
+            <hr>
+            <form asp-action="EditProduct" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id"/>
+                @Html.AntiForgeryToken()
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-12 col-lg-6">
+                                <label class="form-label" asp-for="Name">Ürün Adı</label>
+                                <input type="text" class="form-control" placeholder="Ürün Adı" asp-for="Name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label class="form-label" asp-for="Description">Ürün Açıklaması</label>
+                                <input type="text" class="form-control" placeholder="Ürün Açıklaması" asp-for="Description">
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label class="form-label" asp-for="Price">Ürün Fiyat</label>
+                                <input type="number" class="form-control" placeholder="Ürün Fiyat" asp-for="Price">
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <input class="form-check-input" asp-for="IsActive" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" asp-for="IsActive" for="flexCheckDefault">IsActive</label>
+                                <span asp-validation-for="IsActive" class="text-danger"></span>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label class="form-label" asp-for="DisplayOrder">Ürün sıralaması (Eğer 0 ise en aşağıda gözükür)</label>
+                                <input type="number" class="form-control" placeholder="Sıralama" asp-for="DisplayOrder" value="0">
+                                <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label for="categoryId" class="form-label" asp-for="CategoryId">Kategori</label>
+                                <select asp-for="CategoryId" class="form-select mb-3">
+                                    <option disabled>Select Category</option>
+                                    @foreach (var item in Model.Category)
+                                    {
+                                    <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <label for="productimg" class="form-label" asp-for="UploadedImages">Yeni Ürün Görsel</label>
+                                <input class="form-control" id="productimg" asp-for="UploadedImages" type="file" multiple>
+                                <span asp-validation-for="UploadedImages" class="text-danger"></span>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <label>Existing Images</label>
+                                    <ul style="display: inline-flex; gap: 15px">
+                                        @foreach (var imagePath in Model.ImagePaths)
+                                        {
+                                            <li style="flex-basis: min-content; list-style: none">
+                                                <img src="@imagePath" alt="Product Image" width="100" height="100"/>
+                                                <input type="hidden" class="deleteId" value="@Model.Id"/>
+                                                <input type="hidden" class="deletePath" value="@imagePath"/>
+                                                <a class="deleteBtn btn btn-danger" data-id="@Model.Id" data-path="@imagePath" style="margin-top: 10px">Delete</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="d-flex align-items-center gap-3">
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+    document.querySelectorAll(".deleteBtn").forEach(function(button) {
+        button.addEventListener("click", function() {
+            const deleteId = button.getAttribute("data-id");
+            const deletePath = button.getAttribute("data-path");
+
+            const deleteImg = new FormData();
+            deleteImg.append("id", deleteId);
+            deleteImg.append("imagePath", deletePath);
+
+            $.ajax({
+                type: 'POST',
+                url: '/Admin/DeleteImage',
+                data: deleteImg,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    console.log('Image deleted successfully');
+                    const liElement = button.closest('li');
+                    if (liElement) {
+                        liElement.remove();
+                    }
+                },
+                error: function(error) {
+                    console.error('Error deleting image:', error);
+                }
+            });
+        });
+    });
+</script>
+}

@@ -1,0 +1,15 @@
+﻿@model List<MenuApp.Data.Entities.Category>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <ul class="nav nav-tabs menu_tab mb-4" id="myTab" role="tablist">
+        @foreach (var category in Model)
+        {
+            <li class="nav-item">
+                <a class="nav-link" id="@category.Name.ToLower()-tab" data-toggle="tab" href="#@category.Name.ToLower()" role="tab">@category.Name</a>
+            </li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,59 @@
+﻿@model MenuApp.Data.Entities.Brand?
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<header>
+    <div class="container">
+        <div class="head-logo">
+            @if (Model.Logo != null)
+            {
+                <img class="img-fluid" src="@Model.Logo" alt="restaurant-logo">
+            }
+            else
+            {
+                <h1>@Model.Name</h1>
+            }
+        </div>
+    </div>
+</header>
+
+<div class="wrapper page_title">
+    @if (Model.Facebook != null)
+    {
+        <a href="@Model.Facebook">
+            <div class="bg-ico" id="facebook">
+                <i class="fab fa-facebook social  facebook fa-2x"></i>
+            </div>
+        </a>
+    }
+    @if (Model.Instagram != null)
+    {
+        <a href="@Model.Instagram">
+            <div class="bg-ico" id="instagram">
+                <i class="fab fa-instagram social  instagram fa-2x"></i>
+            </div>
+        </a>
+    }
+    @if (Model.SocialX != null)
+    {
+        <a href="@Model.SocialX">
+            <div class="bg-ico" id="x">
+                <i class="fab fa-x social  tumblr fa-2x"></i>
+            </div>
+        </a>
+    }
+    @if (Model.Tiktok != null)
+    {
+        <a href="@Model.Tiktok">
+            <div class="bg-ico" id="tiktok">
+                <i class="fab fa-tiktok social  whatsapp fa-2x"></i>
+            </div>
+        </a>
+    }
+</div>
+
+<!-- Whatsapp Icon -->
+<a href="https://api.whatsapp.com/send?phone=@Model.Phone" class="float" target="_blank">
+    <i class="fa-brands fa-whatsapp my-float"></i>
+</a>

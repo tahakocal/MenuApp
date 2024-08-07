@@ -1,0 +1,95 @@
+﻿@model IList<MenuApp.Data.Entities.Brand>
+@{
+    ViewData["Title"] = "List brand";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="main-content">
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Brand</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item">
+                        <a href="javascript:">
+                            <i class="bx bx-home-alt"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">List</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="ms-auto">
+            <div class="btn-group">
+                <a asp-action="CreateBrand" asp-controller="Admin" class="btn btn-primary">Create New One</a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-custom">
+                <table id="example" class="table table-striped table-bordered col-lg-12" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>URL</th>
+                        <th>Logo</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var brand in Model)
+                    {
+                        <tr>
+                            <td>@brand.Name</td>
+                            <td>@brand.Description</td>
+                            <td>@brand.BrandUrl</td>
+                            <td>
+                                @if (brand.Logo != null && brand.Logo.Any())
+                                {
+                                    var image = brand.Logo;
+                                    <img src="@image" alt="Product Image" class="img-fluid custom-list-img"/>
+                                }
+                            </td>
+                            <td>
+                                <a asp-action="EditBrand" asp-route-id="@brand.Id" class="btn btn-primary">Edit</a>
+                            </td>
+                            <td>
+                                <form asp-action="DeleteBrand" asp-route-id="@brand.Id" method="post" enctype="multipart/form-data">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>URL</th>
+                        <th>Logo</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/Admin/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="~/Admin/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+</script>
+
+}
